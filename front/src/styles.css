@@ -1,0 +1,39 @@
+body, html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: #fbfbfb;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav {
+    border-bottom: 0px solid #c8c8c8;
+}
+
+
+
+.maxHeight{
+	min-height: 90% !important;
+    height: 90%;
+}
+
+.ui-tabview-panels{
+	min-height: 100% !important;
+    height: 100%;
+}
+
+.codeHeight{
+    height: 75vh;
+}
+
+.centerHv {
+    display: flex;
+    align-items: center;
+}
+
+.bordered{
+    border: 1px solid #c8c8c8;
+}
+
