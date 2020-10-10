@@ -1,0 +1,23 @@
+<div class="p-grid">
+  <div class="p-col-12" style="background-color: #039be5;height: 30px;"> 
+
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
+
+<p-toast position="top-right"></p-toast>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)"  size = "large"
+			 color="#fff" type = "timer" [fullScreen] = "true">
+</ngx-spinner>
+
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle" styleClass="confirmMessage">
+  <p-footer>
+    <p-button pRipple styleClass="p-button-raised p-button-info" icon="pi pi-check" label="Ok"
+              (click)="cd.accept()"></p-button>
+    <p-button pRipple styleClass="p-button-raised p-button-secondary" icon="pi pi-times" label="Cancel"
+              (click)="cd.reject()"></p-button>
+  </p-footer>
+</p-confirmDialog>

@@ -1,0 +1,35 @@
+
+  
+
+   <div class="p-grid p-fluid">
+        <div class="p-col-12">
+            <p-messages [key]="connection.id" [(value)]="errorMsgs"></p-messages>
+        </div>
+    </div> 
+
+
+
+    <div class="p-grid p-fluid">
+        <div class="p-col-4">
+            <span class="ui-panel-title">Host : {{connection.host}}</span>
+        </div>
+        <div class="p-col-6">
+            Font size : {{fontSize}}<p-slider [(ngModel)]="fontSize" [min]="1" [max]="100"></p-slider>
+        </div>
+        <div class="p-col-2">
+            <p-button [style]="{'float':'right'}" styleClass="p-button-raised p-button-warning" label="Clear text" (click)="clear()"></p-button>
+        </div>
+        
+    </div> 
+
+
+    <ace-editor #editor
+    [(text)]="messages" 
+    [mode]="'text'" 
+    [theme]="'terminal'"
+    [options]="editorOptions"
+    [readOnly]="true"
+    [autoUpdateContent]="true" 
+    [durationBeforeCallback]="1000" 
+    [ngStyle]="{'height': '75vh', 'font-size': fontSize+'px'}"
+    (textChanged)="onTextAdded($event)"></ace-editor>

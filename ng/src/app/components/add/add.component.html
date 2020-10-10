@@ -1,0 +1,71 @@
+<form #addForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <p-panel>
+
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="cname">Name</label>
+                <input pInputText type="text" [(ngModel)]="entity.name" id="cname" name="cname" required/> 
+            </div>
+            <div class="p-field p-col">
+                <label for="host">Host</label>
+                <input pInputText type="text" [(ngModel)]="entity.host" id="host" name ="host" required/>
+            </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="port">Port</label>
+                <p-inputNumber [(ngModel)]="entity.port" id="port" name="port" [min]="1" required></p-inputNumber> 
+            </div>
+            <div class="p-field p-col">
+                <label for="username">Username</label>
+                <input pInputText type="text" [(ngModel)]="entity.username" id="username" name="username" required/>
+            </div>
+        </div>        
+
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col"> 
+                <div class="p-grid">
+                 <p-radioButton name="credentials" value="password" [(ngModel)]="pwdMode" inputId="cred1"></p-radioButton>               
+                    <label for="password">Password</label> 
+                </div>               
+                <input pInputText type="password" [(ngModel)]="entity.password" id="password" required name="password" *ngIf="pwdMode=='password'"/> 
+            </div>
+            <div class="p-field p-col">
+                <div class="p-grid">
+                    <p-radioButton name="credentials" value="pem" [(ngModel)]="pwdMode" inputId="cred2"></p-radioButton>
+                    <label for="pemPrivateKey">Pem private key</label>
+                </div>
+                <p-fileUpload accept=".pem" id="pemPrivateKey" name="pemPrivateKey"  [auto]="true" *ngIf="pwdMode=='pem'" 
+                                customUpload="true" (uploadHandler)="processUpload($event)"></p-fileUpload>
+                <input type="hidden" name="keyValue" [(ngModel)]="entity.pemPrivateKey" *ngIf="pwdMode=='pem'" pInputText required>
+            </div>
+        </div>
+
+
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="sudoPwd">Sudo Password</label>
+                <input pInputText type="password" [(ngModel)]="entity.sudoPwd" id="sudoPwd" name="sudoPwd"/> 
+            </div>
+            <div class="p-field p-col">
+                <label for="filePath">File path to watch</label>
+                <input pInputText type="text" [(ngModel)]="entity.filePath" id="filePath" name="filePath" required/>
+            </div>
+        </div>
+
+
+        <p-footer class="p-grid p-jc-end">
+            <p-button pRipple type="submit" icon="pi pi-upload" styleClass="p-button-raised" [disabled]="!addForm.form.valid" label="Save"></p-button>
+        </p-footer>  
+
+       
+    </p-panel>
+</form>
+
+
+		 
+
+
+

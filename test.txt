@@ -1,0 +1,3 @@
+pacex.epac.tn 
+ubuntu
+/opt/pacex-test/logs/catalina.out

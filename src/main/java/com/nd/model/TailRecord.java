@@ -15,6 +15,7 @@ public class TailRecord implements Serializable {
 	private int port;
 	private String username;
 	private String password;
+	private String pemPrivateKey;	
 	private String sudoPwd;
 	private String filePath;
 	
@@ -65,8 +66,13 @@ public class TailRecord implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}    
-    
+	}
+	public String getPemPrivateKey() {
+		return pemPrivateKey;
+	}
+	public void setPemPrivateKey(String pemPrivateKey) {
+		this.pemPrivateKey = pemPrivateKey;
+	}
 	
     
 }

@@ -1,7 +1,11 @@
 package com.nd.threads;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.sshd.client.SshClient;
@@ -15,6 +19,7 @@ import org.apache.sshd.common.io.IoReadFuture;
 import org.apache.sshd.common.io.IoWriteFuture;
 import org.apache.sshd.common.util.buffer.Buffer;
 import org.apache.sshd.common.util.buffer.ByteArrayBuffer;
+import org.apache.sshd.common.util.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
@@ -152,7 +157,19 @@ public class SshConnection implements Runnable {
 														this.record.getPort());
 		connectFuture.await(10, TimeUnit.SECONDS);
 		session = connectFuture.getSession();
-		session.addPasswordIdentity(this.record.getPassword());
+		
+		if(this.record.getPemPrivateKey() == null) {
+			session.addPasswordIdentity(this.record.getPassword());
+		}else {
+			InputStream is = new ByteArrayInputStream(this.record.getPemPrivateKey().getBytes());
+			Iterable<KeyPair> keyPairs = SecurityUtils.loadKeyPairIdentities(session, null,	is, null);
+			Iterator<KeyPair> iterator = keyPairs.iterator();
+			if (iterator.hasNext()) {
+				KeyPair next = iterator.next();
+				session.addPublicKeyIdentity(next);
+			}
+		}
+
 		session.auth().verify(10, TimeUnit.SECONDS);
 	}
 
