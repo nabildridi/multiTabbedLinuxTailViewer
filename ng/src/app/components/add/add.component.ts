@@ -23,6 +23,10 @@ export class AddFormComponent implements OnInit {
         if( this.entity == null){
             this.mode = "add";
             this.entity = new ConnectionData();
+        }else{
+            if(this.entity.pemPrivateKey != null){
+                this.pwdMode = "pem"
+            }
         }       
     }
 
