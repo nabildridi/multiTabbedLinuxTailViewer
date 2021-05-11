@@ -27,7 +27,7 @@
     "primeicons": "4.0.0",
     "primeflex": "2.0.0",
     "ng2-ace-editor": "0.3.9",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "ng-event-source": "1.0.14",
     "ngx-spinner": "10.0.1"
   },
